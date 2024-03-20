@@ -1,5 +1,6 @@
 import threading
 import time
+import math
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import TwistStamped
@@ -16,9 +17,9 @@ class RosEngineSoundSim(Node):
         self._streams = []
         
         self._max_throttle_vel = 0.5
-        self._max_engine_rpm = 6200
+        self._max_engine_rpm = 1.0
         
-        self._set_engine_rpm = 100
+        self._set_engine_rpm = 0
 
     
     def configure(self):
@@ -48,11 +49,12 @@ class RosEngineSoundSim(Node):
         return super().destroy_node()
 
     def cmd_vel_cb(self, msg: TwistStamped):
-        total_vel = msg.twist.linear.x * msg.twist.linear.x + msg.twist.linear.y * msg.twist.linear.y + msg.twist.linear.z * msg.twist.linear.z
+        total_vel = math.sqrt(msg.twist.linear.x * msg.twist.linear.x + msg.twist.linear.y * msg.twist.linear.y + msg.twist.linear.z * msg.twist.linear.z)
         self._set_engine_rpm = total_vel / self._max_throttle_vel * self._max_engine_rpm
         
     def sound_thread_loop(self):
         while rclpy.ok():
             for engine in self._engines:
-                engine.set_rpm(self._set_engine_rpm)
+                #engine.set_rpm(self._set_engine_rpm)
+                engine.throttle(self._set_engine_rpm)
             time.sleep(0.02)
