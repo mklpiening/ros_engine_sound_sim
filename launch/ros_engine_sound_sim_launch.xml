@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="ros_engine_sound_sim" exec="ros_engine_sound_sim" name="engine_sound_generator" output="screen">
+  </node>
+</launch>

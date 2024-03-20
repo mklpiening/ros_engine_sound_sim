@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ros_engine_sound_sim</name>
+  <version>1.0.0</version>
+  <description>The ros_engine_sound_sim package</description>
+
+  <maintainer email="malte.kleine.piening@naturerobots.com">Malte kleine Piening</maintainer>
+  
+  <license>TODO</license>
+
+  <author email="malte.kleine.piening@naturerobots.com">Malte kleine Piening</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+  
+  <depend>geometry_msgs</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
