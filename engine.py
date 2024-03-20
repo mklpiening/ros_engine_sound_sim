@@ -16,7 +16,7 @@ def _convert_timing_format(timing):
         timing[i] += timing[i-1]
 
 class Engine:
-    def __init__(self, idle_rpm, limiter_rpm, strokes, cylinders, timing, fire_snd, between_fire_snd, unequal=[]):
+    def __init__(self, idle_rpm, limiter_rpm, strokes, cylinders, timing, fire_snd, between_fire_snd, unequal=[], min_rpm=0):
         '''
         Note: all sounds used will be concatenated to suit engine run speed.
         Make sure there's excess audio data available in the buffer.
@@ -35,6 +35,7 @@ class Engine:
         # the pop as the audio device opens.
         self._audio_buffer = np.zeros([256])
 
+        self._min_rpm = min_rpm
         self._rpm = idle_rpm
         self.idle_rpm = idle_rpm
         self.limiter_rpm = limiter_rpm
@@ -189,6 +190,8 @@ class Engine:
     def gen_audio(self, num_samples):
         '''Return `num_samples` audio samples representing the engine running'''
         # If we already have enough samples buffered, just return those
+        if self._rpm < self._min_rpm:
+            return np.zeros(256)
         if num_samples < len(self._audio_buffer):
             buf = self._audio_buffer[:num_samples]
             self._audio_buffer = self._audio_buffer[num_samples:]

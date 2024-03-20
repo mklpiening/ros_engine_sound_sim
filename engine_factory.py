@@ -119,6 +119,56 @@ def v_8_FP_TVR():
         between_fire_snd=synth.silence(1)
     )
 
+def lero1():
+    return Engine(
+        idle_rpm=700,
+        limiter_rpm=6000,
+        strokes=4,
+        cylinders=8,
+        min_rpm=700,
+        timing=[180, 270, 180, 90, 180, 270, 180, 90],
+        fire_snd=_fire_snd,
+        unequal=[1, 0, 1, 0, 1, 0, 1, 0],
+        between_fire_snd=synth.silence(1)
+    )
+
+def lero2():
+    return Engine(
+        idle_rpm=800,
+        limiter_rpm=6050,
+        strokes=4,
+        cylinders=8,
+        min_rpm=810,
+        timing=[180, 270, 180, 90, 180, 270, 180, 90],
+        fire_snd=_fire_snd,
+        unequal=[10, 0, 1, 0, 1, 0, 1, 0],
+        between_fire_snd=synth.silence(1)
+    )
+
+def lero3():
+    # whynot=5
+    # return Engine(
+    #     idle_rpm=800,
+    #     limiter_rpm=6500,
+    #     strokes=4,
+    #     cylinders=whynot,
+    #     min_rpm=810,
+    #     timing=[720/whynot]*whynot,
+    #     fire_snd=_fire_snd,
+    #     between_fire_snd=synth.silence(1)
+    # )
+    return Engine(
+        idle_rpm=1250,
+        limiter_rpm=6150,
+        strokes=4,
+        cylinders=8,
+        min_rpm=25000,
+        timing=[180, 270, 180, 90, 180, 270, 180, 90],
+        fire_snd=_fire_snd,
+        unequal=[0, 0, 1, 0, 1, 0, 1, 0],
+        between_fire_snd=synth.silence(1)
+    )
+
 def w_16():
     return Engine(
         idle_rpm=800,
